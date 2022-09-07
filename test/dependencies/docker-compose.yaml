@@ -1,0 +1,12 @@
+version: '3.9'
+services:
+  database:
+    image: postgres:13
+    ports:
+      - '5432:5432'
+    restart: always
+    environment:
+      - POSTGRES_USER=tgs
+      - POSTGRES_PASSWORD=tgs
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_DB=tgs
