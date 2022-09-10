@@ -18,6 +18,7 @@ export default function loadConfig() {
     if (errors.length > 0) {
       throw new Error('config validation failed. errors: ' + errors.toString());
     }
+    return loadedConfig;
   }
   return Config.default();
 }
