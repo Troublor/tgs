@@ -12,8 +12,12 @@ yarn-error.log
 # Compilation
 /dist
 
-# RClone remote
-/.rclone/
+# editor config
+/.vscode/
+/.idea/
+
+# test
+/test/
 
 # data temp
 /data/

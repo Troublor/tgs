@@ -1,4 +1,4 @@
-import { CloudflareAccessPrivateGuard } from './cloudflare-access.guard';
+import { CloudflareAccessGuard } from './cloudflare-access.guard';
 import { Logger } from 'winston';
 import { ExecutionContext } from '@nestjs/common';
 
@@ -11,13 +11,13 @@ const jwtSignature =
 
 describe('Cloudflare Access Guard', () => {
   describe('Private Guard', () => {
-    let guard: CloudflareAccessPrivateGuard;
+    let guard: CloudflareAccessGuard;
 
     beforeEach(() => {
       const logger: () => Logger = jest.fn().mockReturnValue({
         info: jest.fn(),
       });
-      guard = new CloudflareAccessPrivateGuard(logger());
+      guard = new CloudflareAccessGuard(logger());
     });
 
     it('should authenticate only my own access', async () => {

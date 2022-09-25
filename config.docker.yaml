@@ -1,0 +1,18 @@
+mode: production
+port: 3000
+log:
+  level: info
+  file: logs/
+database:
+  host: database
+  port: 5432
+  username: tgs
+  password: tgs
+  database: tgs
+  netDriveBackupFolder: Database/tgs-postgres
+  backupInterval: 3600000 # 1 hour
+netDrive:
+  rcloneConfigPath: .rclone/rclone.conf
+  rcloneRemote: OneDrive
+hledger:
+  netDriveLedgerFilePath: Database/hledger/main.journal

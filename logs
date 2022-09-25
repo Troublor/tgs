@@ -1,0 +1,50 @@
+{"level":"info","message":"Starting backup","module":"database","service":"backup"}
+{"level":"info","message":"starting backup database tgs","module":"database","service":"backup"}
+{"level":"info","message":"dumped database to tgs-database-backup-p5h8qB/dump.sql.gz","module":"database","service":"backup"}
+{"level":"info","message":"dumped database to tgs-database-backup-p5h8qB/dump.sql.gz","module":"database","service":"backup"}
+{"level":"info","message":"touched OneDrive:.fish","module":"netdrive","service":"rclone"}
+{"level":"info","message":"rclone is healthy","module":"netdrive"}
+{"level":"info","message":"Telegram bot launched","module":"message"}
+{"level":"info","message":"touched OneDrive:Database/hledger/.fish","module":"netdrive","service":"rclone"}
+{"level":"info","message":"mounted OneDrive:Database/hledger to /tmp/tgs-ledger-file-KyifZp","module":"netdrive","service":"rclone"}
+{"level":"info","message":"ledger file prepared at /tmp/tgs-ledger-file-KyifZp/main.journal","module":"hledger","service":"ledger-file"}
+{"level":"info","message":"Ledger file is healthy","module":"hledger"}
+{"level":"info","message":"hledger-web started on port 36343","module":"hledger"}
+{"level":"info","message":"HLedger service started","module":"hledger"}
+{"level":"info","message":"synced tgs-database-backup-p5h8qB/dump.sql.gz to OneDrive:Database/tgs-postgres/tgs-development.sql.gz","module":"netdrive","service":"rclone"}
+{"level":"info","message":"saved database dump to remote OneDrive:Database/tgs-postgres/tgs-development.sql.gz","module":"database","service":"backup"}
+{"chat":949073213,"level":"debug","message":"Got message from telegram","module":"NotifierBot","msg":{"chat":{"first_name":"William Aaron","id":949073213,"last_name":"Cheung","type":"private","username":"troublor"},"date":1664103993,"entities":[{"length":7,"offset":0,"type":"bot_command"}],"from":{"first_name":"William Aaron","id":949073213,"is_bot":false,"language_code":"en","last_name":"Cheung","username":"troublor"},"message_id":3904,"text":"/status"}}
+{"level":"info","message":"Starting backup","module":"database","service":"backup"}
+{"level":"info","message":"starting backup database tgs","module":"database","service":"backup"}
+{"level":"info","message":"dumped database to tgs-database-backup-MWdZf4/dump.sql.gz","module":"database","service":"backup"}
+{"level":"info","message":"dumped database to tgs-database-backup-MWdZf4/dump.sql.gz","module":"database","service":"backup"}
+{"level":"info","message":"touched OneDrive:.fish","module":"netdrive","service":"rclone"}
+{"level":"info","message":"rclone is healthy","module":"netdrive"}
+{"level":"info","message":"Telegram bot launched","module":"message"}
+{"level":"info","message":"synced tgs-database-backup-MWdZf4/dump.sql.gz to OneDrive:Database/tgs-postgres/tgs-development.sql.gz","module":"netdrive","service":"rclone"}
+{"level":"info","message":"saved database dump to remote OneDrive:Database/tgs-postgres/tgs-development.sql.gz","module":"database","service":"backup"}
+{"level":"info","message":"touched OneDrive:Database/hledger/.fish","module":"netdrive","service":"rclone"}
+{"level":"info","message":"mounted OneDrive:Database/hledger to /tmp/tgs-ledger-file-AybWN0","module":"netdrive","service":"rclone"}
+{"level":"info","message":"ledger file prepared at /tmp/tgs-ledger-file-AybWN0/main.journal","module":"hledger","service":"ledger-file"}
+{"level":"info","message":"Ledger file is healthy","module":"hledger"}
+{"level":"info","message":"hledger-web started on port 32817","module":"hledger"}
+{"level":"info","message":"HLedger service started","module":"hledger"}
+{"chat":949073213,"level":"debug","message":"Got message from telegram","module":"NotifierBot","msg":{"chat":{"first_name":"William Aaron","id":949073213,"last_name":"Cheung","type":"private","username":"troublor"},"date":1664104068,"entities":[{"length":7,"offset":0,"type":"bot_command"}],"from":{"first_name":"William Aaron","id":949073213,"is_bot":false,"language_code":"en","last_name":"Cheung","username":"troublor"},"message_id":3905,"text":"/status"}}
+{"chat":949073213,"level":"debug","message":"Got message from telegram","module":"NotifierBot","msg":{"chat":{"first_name":"William Aaron","id":949073213,"last_name":"Cheung","type":"private","username":"troublor"},"date":1664104079,"entities":[{"length":5,"offset":0,"type":"bot_command"}],"from":{"first_name":"William Aaron","id":949073213,"is_bot":false,"language_code":"en","last_name":"Cheung","username":"troublor"},"message_id":3907,"text":"/link"}}
+{"chat":949073213,"level":"debug","message":"Got message from telegram","module":"NotifierBot","msg":{"chat":{"first_name":"William Aaron","id":949073213,"last_name":"Cheung","type":"private","username":"troublor"},"date":1664104094,"entities":[{"length":5,"offset":0,"type":"bot_command"}],"from":{"first_name":"William Aaron","id":949073213,"is_bot":false,"language_code":"en","last_name":"Cheung","username":"troublor"},"message_id":3909,"text":"/link troublor"}}
+{"level":"info","message":"Linked chat 949073213 to username: troublor","module":"NotifierBot"}
+{"level":"info","message":"Starting backup","module":"database","service":"backup"}
+{"level":"info","message":"starting backup database tgs","module":"database","service":"backup"}
+{"level":"info","message":"dumped database to tgs-database-backup-Q4yemm/dump.sql.gz","module":"database","service":"backup"}
+{"level":"info","message":"dumped database to tgs-database-backup-Q4yemm/dump.sql.gz","module":"database","service":"backup"}
+{"level":"info","message":"touched OneDrive:.fish","module":"netdrive","service":"rclone"}
+{"level":"info","message":"rclone is healthy","module":"netdrive"}
+{"level":"info","message":"Telegram bot launched","module":"message"}
+{"level":"info","message":"synced tgs-database-backup-Q4yemm/dump.sql.gz to OneDrive:Database/tgs-postgres/tgs-development.sql.gz","module":"netdrive","service":"rclone"}
+{"level":"info","message":"saved database dump to remote OneDrive:Database/tgs-postgres/tgs-development.sql.gz","module":"database","service":"backup"}
+{"level":"info","message":"touched OneDrive:Database/hledger/.fish","module":"netdrive","service":"rclone"}
+{"level":"info","message":"mounted OneDrive:Database/hledger to /tmp/tgs-ledger-file-JrXKIS","module":"netdrive","service":"rclone"}
+{"level":"info","message":"ledger file prepared at /tmp/tgs-ledger-file-JrXKIS/main.journal","module":"hledger","service":"ledger-file"}
+{"level":"info","message":"Ledger file is healthy","module":"hledger"}
+{"level":"info","message":"hledger-web started on port 46581","module":"hledger"}
+{"level":"info","message":"HLedger service started","module":"hledger"}

@@ -1,0 +1,24 @@
+services:
+  database:
+    image: postgres:14.5
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: tgs
+      POSTGRES_USER: tgs
+      POSTGRES_DB: tgs
+      PGDATA: /pgdata
+    volumes:
+      - pgdata:/pgdata
+
+  tgs:
+    image: tgs:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    restart: always
+    ports:
+      - 3000:3000
+
+volumes:
+  pgdata:

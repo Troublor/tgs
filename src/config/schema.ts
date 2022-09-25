@@ -1,10 +1,13 @@
 import {
   IsIn,
+  IsInt,
   IsNotEmpty,
+  IsNumber,
   IsOptional,
   IsPort,
   ValidateNested,
 } from 'class-validator';
+import { Optional } from '@nestjs/common';
 
 export class LogConfig {
   static default() {
@@ -23,6 +26,19 @@ export class LogConfig {
   readonly file?: string;
 }
 
+export class HLedgerConfig {
+  static default() {
+    return new HLedgerConfig();
+  }
+
+  private constructor() {
+    this.netDriveLedgerFilePath = 'Database/hledger/main.journal';
+  }
+
+  @IsOptional()
+  readonly netDriveLedgerFilePath?: string;
+}
+
 export class DatabaseConfig {
   static default() {
     return new DatabaseConfig();
@@ -34,6 +50,8 @@ export class DatabaseConfig {
     this.username = 'tgs';
     this.password = 'tgs';
     this.database = 'tgs';
+    this.netDriveBackupFolder = 'Database/tgs-postgres';
+    this.backupInterval = 1000 * 3600;
   }
 
   readonly host: string;
@@ -44,10 +62,47 @@ export class DatabaseConfig {
   @IsNotEmpty()
   readonly username: string;
 
+  @Optional()
   readonly password?: string;
 
   @IsNotEmpty()
   readonly database: string;
+
+  @IsNotEmpty()
+  readonly netDriveBackupFolder: string;
+
+  @IsInt()
+  readonly backupInterval: number;
+}
+
+export class NetDriveConfig {
+  static default() {
+    return new NetDriveConfig();
+  }
+
+  private constructor() {
+    this.rcloneConfigPath = '.rclone/rclone.conf';
+    this.rcloneRemote = 'OneDrive';
+  }
+
+  @IsNotEmpty({ message: 'rclone config path is required' })
+  readonly rcloneConfigPath: string;
+
+  @IsNotEmpty()
+  readonly rcloneRemote: string;
+}
+
+export class TelegramBotConfig {
+  static default() {
+    return new TelegramBotConfig();
+  }
+
+  private constructor() {
+    this.token = '';
+  }
+
+  @IsNotEmpty()
+  readonly token: string;
 }
 
 export default class Config {
@@ -57,16 +112,31 @@ export default class Config {
 
   private constructor() {
     this.mode = 'development';
+    this.port = 3000;
     this.log = LogConfig.default();
     this.database = DatabaseConfig.default();
+    this.netDrive = NetDriveConfig.default();
+    this.hledger = HLedgerConfig.default();
+    this.telegramBot = TelegramBotConfig.default();
   }
 
   @IsIn(['production', 'development'])
   readonly mode: 'production' | 'development';
+
+  readonly port: number;
 
   @ValidateNested()
   readonly log: LogConfig;
 
   @ValidateNested()
   readonly database: DatabaseConfig;
+
+  @ValidateNested()
+  readonly netDrive: NetDriveConfig;
+
+  @ValidateNested()
+  readonly hledger: HLedgerConfig;
+
+  @ValidateNested()
+  readonly telegramBot: TelegramBotConfig;
 }

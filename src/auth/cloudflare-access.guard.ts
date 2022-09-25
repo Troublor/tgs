@@ -4,27 +4,37 @@ import {
   Inject,
   Injectable,
 } from '@nestjs/common';
-import { Request } from 'express';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
-import { Logger } from 'winston';
+import winston from 'winston';
+import RequestWithUser from './request.js';
+import { DataSource } from 'typeorm';
+import User from '../database/entities/User.entity.js';
 
 /**
  * Guard that only grant access to my own.
  */
 @Injectable()
-export class CloudflareAccessPrivateGuard implements CanActivate {
+export class CloudflareAccessGuard implements CanActivate {
   constructor(
-    @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: Logger,
+    @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: winston.Logger,
+    private readonly dataSource: DataSource,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const req: Request = context.switchToHttp().getRequest();
+    const req: RequestWithUser = context.switchToHttp().getRequest();
     // Jwt format can be found in https://developers.cloudflare.com/cloudflare-one/identity/authorization-cookie/application-token/
     const cfJwt = req.header('Cf-Access-Jwt-Assertion');
     if (!cfJwt) return false;
     try {
       const token = parseApplicationToken(cfJwt);
-      return token.payload.email === 'troublor@live.com';
+      const user = await this.dataSource.getRepository(User).findOne({
+        where: {
+          email: token.payload.email,
+        },
+      });
+      if (!user) return false;
+      req.user = user;
+      return true;
     } catch (e: unknown) {
       this.logger.info('Failed to parse application token', e);
       return false;

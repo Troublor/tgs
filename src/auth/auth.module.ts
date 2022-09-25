@@ -1,14 +1,9 @@
 import { Module } from '@nestjs/common';
-import { CloudflareAccessPrivateGuard } from './cloudflare-access.guard';
-import { WinstonModule } from 'nest-winston';
+import { CloudflareAccessGuard } from './cloudflare-access.guard';
+import PrivateGuard from './private.guard.js';
 
 @Module({
-  imports: [
-    WinstonModule.forRoot({
-      level: 'info',
-    }),
-  ],
-  providers: [CloudflareAccessPrivateGuard],
-  exports: [CloudflareAccessPrivateGuard],
+  providers: [CloudflareAccessGuard, PrivateGuard],
+  exports: [CloudflareAccessGuard, PrivateGuard],
 })
 export default class AuthModule {}

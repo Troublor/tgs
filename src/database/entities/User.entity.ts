@@ -3,8 +3,11 @@ import { Column, Entity, PrimaryColumn } from 'typeorm';
 @Entity()
 export default class User {
   @PrimaryColumn({ type: String })
-  email!: string;
+  username!: string;
 
   @Column({ type: String, nullable: true })
   name!: string | null;
+
+  @Column({ type: String, nullable: true })
+  email!: string | null;
 }

@@ -1,0 +1,5 @@
+# Get to request OneDrive permissions
+https://login.microsoftonline.com/81ee8311-f192-4a9a-b4d2-1922f9349f89/oauth2/v2.0/authorize?client_id=404c8cec-ff6a-44ed-b50e-3bb12db84cee&response_type=code&redirect_uri=https://realm.troublor.xyz/azure/auth&response_mode=query&scope=offline_access%20user.read%20mail.read&state=12345
+Accept: application/json
+
+###
