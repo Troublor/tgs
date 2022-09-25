@@ -25,6 +25,11 @@ services:
       - type: bind
         source: ./.rclone
         target: /app/.rclone
+      - type: bind
+        source: ./config.yaml
+        target: /app/config.yaml
+    environment:
+      - TGS_CONFIG=/app/config.yaml
     ports:
       - 3000:3000 # tgs
       - 5000:5000 # hledger-web
