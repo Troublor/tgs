@@ -30,12 +30,13 @@ export default class HLedgerService {
 
   private async startHLedgerRESTfulServer(): Promise<void> {
     this._port = await this.configService.get('hledger.port', { infer: true });
+    const domain = await this.configService.get('hledger.baseUrl', { infer: true });
     this._process = child_process.spawn('hledger-web', [
       '--serve',
       '--port',
       `${this._port}`,
-      '--host',
-      '0.0.0.0',
+      '--base-url',
+      'https://hledger.troublor.xyz',
       '--cors',
       '*',
       '--file',

@@ -9,8 +9,10 @@ services:
       PGDATA: /pgdata
     volumes:
       - type: bind
-        source: ./data
+        source: ./pgdata
         target: /pgdata
+    ports:
+      - 5432:5432
 
   tgs:
     image: tgs:latest

@@ -28,4 +28,4 @@ RUN yarn install
 RUN yarn build
 
 ENV TGS_CONFIG=/app/config.yaml
-ENTRYPOINT ["yarn", "run"]
+ENTRYPOINT ["yarn", "start"]

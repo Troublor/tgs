@@ -32,12 +32,17 @@ export class HLedgerConfig {
   private constructor() {
     this.netDriveLedgerFilePath = 'Database/hledger/main.journal';
     this.port = 5000;
+    this.baseUrl = 'https://hledger.troublor.xyz';
   }
 
   @IsNotEmpty()
   readonly netDriveLedgerFilePath: string;
 
+  @IsNotEmpty()
   readonly port: number;
+
+  @IsNotEmpty()
+  readonly baseUrl: string;
 }
 
 export class DatabaseConfig {
