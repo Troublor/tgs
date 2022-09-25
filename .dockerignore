@@ -23,4 +23,7 @@ yarn-error.log
 /data/
 /pgdata/
 
+# logs
+/logs/
+
 /config.yaml
