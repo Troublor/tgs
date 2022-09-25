@@ -8,17 +8,23 @@ services:
       POSTGRES_DB: tgs
       PGDATA: /pgdata
     volumes:
-      - pgdata:/pgdata
+      - type: bind
+        source: ./data
+        target: /pgdata
 
   tgs:
     image: tgs:latest
     build:
       context: .
       dockerfile: Dockerfile
-
     restart: always
+    volumes:
+      - type: bind
+        source: ./logs/
+        target: /app/logs/
+      - type: bind
+        source: ./.rclone
+        target: /app/.rclone
     ports:
-      - 3000:3000
-
-volumes:
-  pgdata:
+      - 3000:3000 # tgs
+      - 5000:5000 # hledger-web

@@ -2,7 +2,7 @@ mode: development
 port: 3000
 log:
   level: debug
-  file: logs/
+  file: logs/tgs.log
 database:
   host: localhost
   port: 5432

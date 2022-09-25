@@ -30,6 +30,10 @@ export class init1664103040538 implements MigrationInterface {
       ADD CONSTRAINT "FK_838b22ffd982823818680c50064" FOREIGN KEY ("receiverUsername") REFERENCES "user" ("username") ON DELETE NO ACTION ON UPDATE NO ACTION`);
     await queryRunner.query(`ALTER TABLE "chat"
       ADD CONSTRAINT "FK_108f0d6677e283315af8f30151b" FOREIGN KEY ("userUsername") REFERENCES "user" ("username") ON DELETE NO ACTION ON UPDATE NO ACTION`);
+
+    await queryRunner.query(
+      `INSERT INTO "user" ("username", "name", "email") VALUES ('troublor', 'William Aaron Cheung', 'troublor@live.com')`,
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {

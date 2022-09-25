@@ -4,6 +4,8 @@ import winston from 'winston';
 import LedgerFileService from './ledger-file.service.js';
 import * as child_process from 'child_process';
 import * as net from 'net';
+import { ConfigService } from '@nestjs/config';
+import Config from '../config/schema.js';
 
 @Injectable()
 export default class HLedgerService {
@@ -12,6 +14,7 @@ export default class HLedgerService {
 
   constructor(
     @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: winston.Logger,
+    private readonly configService: ConfigService<Config, true>,
     private readonly ledgerFileService: LedgerFileService,
   ) {
     this.logger = this.logger.child({ module: 'hledger' });
@@ -26,7 +29,7 @@ export default class HLedgerService {
   }
 
   private async startHLedgerRESTfulServer(): Promise<void> {
-    this._port = await this.findFreePort();
+    this._port = await this.configService.get('hledger.port', { infer: true });
     this._process = child_process.spawn('hledger-web', [
       '--serve',
       '--port',

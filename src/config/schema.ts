@@ -2,8 +2,6 @@ import {
   IsIn,
   IsInt,
   IsNotEmpty,
-  IsNumber,
-  IsOptional,
   IsPort,
   ValidateNested,
 } from 'class-validator';
@@ -16,14 +14,14 @@ export class LogConfig {
 
   private constructor() {
     this.level = 'info';
-    this.file = undefined;
+    this.file = './logs/tgs.log';
   }
 
   @IsIn(['debug', 'info', 'warn', 'error'])
   readonly level: 'debug' | 'info' | 'warn' | 'error';
 
-  @IsOptional()
-  readonly file?: string;
+  @IsNotEmpty()
+  readonly file: string;
 }
 
 export class HLedgerConfig {
@@ -33,10 +31,13 @@ export class HLedgerConfig {
 
   private constructor() {
     this.netDriveLedgerFilePath = 'Database/hledger/main.journal';
+    this.port = 5000;
   }
 
-  @IsOptional()
-  readonly netDriveLedgerFilePath?: string;
+  @IsNotEmpty()
+  readonly netDriveLedgerFilePath: string;
+
+  readonly port: number;
 }
 
 export class DatabaseConfig {

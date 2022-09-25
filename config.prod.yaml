@@ -2,17 +2,19 @@ mode: production
 port: 3000
 log:
   level: info
-  file: logs/
+  file: logs/tgs.log
 database:
   host: database
   port: 5432
   username: tgs
   password: tgs
   database: tgs
-  netDriveBackupFolder: Database/tgs-postgres
-  backupInterval: 3600000 # 1 hour
+  netDriveBackupFolder: Database/tgs-postgres-test
+  backupInterval: 600000 # every 10 min
 netDrive:
   rcloneConfigPath: .rclone/rclone.conf
   rcloneRemote: OneDrive
 hledger:
   netDriveLedgerFilePath: Database/hledger/main.journal
+telegramBot:
+  token: op://Personal/Telegram-Notifier-Bot/token
