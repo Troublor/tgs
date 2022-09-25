@@ -62,7 +62,6 @@ export class DatabaseConfig {
 
   readonly host: string;
 
-  @IsPort()
   readonly port: number;
 
   @IsNotEmpty()
