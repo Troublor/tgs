@@ -45,7 +45,16 @@ export default class RCloneService {
   async mountFolder(remote: string, mountPoint: string): Promise<void> {
     const mountProcess = child_process.spawn(
       'rclone',
-      ['mount', remote, mountPoint, '--daemon'],
+      [
+        'mount',
+        remote,
+        mountPoint,
+        '--daemon',
+        '--vfs-cache-mode',
+        'full',
+        '--vfs-poll-interval',
+        '5s',
+      ],
       {
         env: {
           RCLONE_CONFIG: this.rcloneConfigFilePath,
