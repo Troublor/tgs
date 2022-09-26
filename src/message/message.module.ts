@@ -10,6 +10,8 @@ import winston from 'winston';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import Chat from './entities/chat.entity.js';
 import Message from './entities/message.entity.js';
+import { ConfigService } from '@nestjs/config';
+import Config from '../config/schema.js';
 
 @Module({
   imports: [DatabaseModule, TypeOrmModule.forFeature([Chat, Message])],
@@ -20,6 +22,7 @@ import Message from './entities/message.entity.js';
 export default class MessageModule implements OnModuleInit, OnModuleDestroy {
   constructor(
     @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: winston.Logger,
+    private readonly configService: ConfigService<Config, true>,
     private readonly notifierBotService: NotifierBotService,
   ) {
     this.logger = logger.child({ module: 'message' });
@@ -27,15 +30,22 @@ export default class MessageModule implements OnModuleInit, OnModuleDestroy {
 
   async onModuleInit() {
     // start telegram bot
-    try {
-      await this.notifierBotService.launch();
-      this.logger.info('Telegram bot launched');
-    } catch (e) {
-      this.logger.error('Failed to launch telegram bot', { err: e });
+    if (this.configService.get('telegramBot.disable', { infer: true })) {
+      this.logger.info('Telegram bot is disabled');
+    } else {
+      try {
+        await this.notifierBotService.launch();
+        this.logger.info('Telegram bot launched');
+      } catch (e) {
+        this.logger.error('Failed to launch telegram bot', { err: e });
+      }
     }
   }
 
   async onModuleDestroy() {
-    await this.notifierBotService.shutdown();
+    if (this.configService.get('telegramBot.disable', { infer: true })) {
+    } else {
+      await this.notifierBotService.shutdown();
+    }
   }
 }

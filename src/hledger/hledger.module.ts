@@ -5,6 +5,8 @@ import winston from 'winston';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import NetDriveModule from '../netdrive/netdrive.module.js';
 import HLedgerService from './hledger.service.js';
+import { ConfigService } from '@nestjs/config';
+import Config from '../config/schema.js';
 
 @Module({
   imports: [NetDriveModule],
@@ -14,6 +16,7 @@ import HLedgerService from './hledger.service.js';
 export default class HLedgerModule implements OnModuleInit, OnModuleDestroy {
   constructor(
     @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: winston.Logger,
+    private readonly configService: ConfigService<Config, true>,
     private readonly ledgerFileService: LedgerFileService,
     private readonly hledgerService: HLedgerService,
   ) {
@@ -21,6 +24,10 @@ export default class HLedgerModule implements OnModuleInit, OnModuleDestroy {
   }
 
   async onModuleInit() {
+    if (this.configService.get('hledger.disable', { infer: true })) {
+      this.logger.info('hledger is disabled');
+      return;
+    }
     await this.ledgerFileService.start();
     if (!(await this.ledgerFileService.checkHealth())) {
       this.logger.error('Ledger file is not healthy');
@@ -33,6 +40,9 @@ export default class HLedgerModule implements OnModuleInit, OnModuleDestroy {
   }
 
   async onModuleDestroy() {
+    if (this.configService.get('hledger.disable', { infer: true })) {
+      return;
+    }
     this.logger.info('Stopping hledger service');
     await this.hledgerService.stop();
 

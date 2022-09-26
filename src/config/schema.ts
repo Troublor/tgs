@@ -1,10 +1,4 @@
-import {
-  IsIn,
-  IsInt,
-  IsNotEmpty,
-  IsPort,
-  ValidateNested,
-} from 'class-validator';
+import { IsIn, IsInt, IsNotEmpty, ValidateNested } from 'class-validator';
 import { Optional } from '@nestjs/common';
 
 export class LogConfig {
@@ -33,6 +27,7 @@ export class HLedgerConfig {
     this.netDriveLedgerFilePath = 'Database/hledger/main.journal';
     this.port = 5000;
     this.baseUrl = 'https://hledger.troublor.xyz';
+    this.disable = false;
   }
 
   @IsNotEmpty()
@@ -43,6 +38,8 @@ export class HLedgerConfig {
 
   @IsNotEmpty()
   readonly baseUrl: string;
+
+  readonly disable: boolean;
 }
 
 export class DatabaseConfig {
@@ -104,10 +101,13 @@ export class TelegramBotConfig {
 
   private constructor() {
     this.token = '';
+    this.disable = false;
   }
 
   @IsNotEmpty()
   readonly token: string;
+
+  readonly disable: boolean;
 }
 
 export default class Config {

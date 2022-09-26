@@ -9,12 +9,15 @@ database:
   username: tgs
   password: tgs
   database: tgs
-  netDriveBackupFolder: Database/tgs-postgres
+  netDriveBackupFolder: Database/tgs-postgres-test
   backupInterval: 3600000 # 1 hour
 netDrive:
   rcloneConfigPath: .rclone/rclone.conf
   rcloneRemote: OneDrive
 hledger:
+  disable: false
   netDriveLedgerFilePath: Database/hledger/main.journal
+  baseUrl: http://localhost:5000
 telegramBot:
+  disable: true
   token: op://Personal/Telegram-Notifier-Bot/token

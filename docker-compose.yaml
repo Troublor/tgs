@@ -20,6 +20,12 @@ services:
       context: .
       dockerfile: Dockerfile
     restart: always
+    cap_add:
+      - SYS_ADMIN
+    devices:
+      - /dev/fuse
+    security_opt:
+      - apparmor:unconfined
     volumes:
       - type: bind
         source: ./logs/

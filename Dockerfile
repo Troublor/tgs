@@ -1,6 +1,6 @@
 FROM node:18-alpine3.16
 
-RUN apk add curl
+RUN apk add curl fuse
 
 # install rclone
 RUN curl -O https://downloads.rclone.org/rclone-current-linux-amd64.zip

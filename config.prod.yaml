@@ -9,7 +9,7 @@ database:
   username: tgs
   password: tgs
   database: tgs
-  netDriveBackupFolder: Database/tgs-postgres-test
+  netDriveBackupFolder: Database/tgs-postgres
   backupInterval: 600000 # every 10 min
 netDrive:
   rcloneConfigPath: .rclone/rclone.conf
