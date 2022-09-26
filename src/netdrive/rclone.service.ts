@@ -52,7 +52,7 @@ export default class RCloneService {
         '--daemon',
         '--vfs-cache-mode',
         'full',
-        '--vfs-poll-interval',
+        '--vfs-cache-poll-interval',
         '5s',
       ],
       {
