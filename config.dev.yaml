@@ -4,7 +4,7 @@ log:
   level: debug
   file: logs/tgs.log
 database:
-  host: localhost
+  host: database
   port: 5432
   username: tgs
   password: tgs

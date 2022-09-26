@@ -15,7 +15,7 @@ services:
       - 5432:5432
 
   tgs:
-    image: tgs:latest
+    image: troublor/tgs:latest
     build:
       context: .
       dockerfile: Dockerfile

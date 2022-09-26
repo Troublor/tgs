@@ -27,3 +27,5 @@ yarn-error.log
 /logs/
 
 /config.yaml
+/docker-compose.yaml
+/Dockerfile
