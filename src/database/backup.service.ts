@@ -8,12 +8,16 @@ import path from 'path';
 import fs from 'fs';
 import RCloneService from '../netdrive/rclone.service.js';
 import Config from '../config/schema.js';
+import { DataSource } from 'typeorm';
+import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions.js';
+import { PostgresConnectionCredentialsOptions } from 'typeorm/driver/postgres/PostgresConnectionCredentialsOptions.js';
 
 @Injectable()
 export default class BackupService {
   constructor(
     @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: winston.Logger,
     private readonly configService: ConfigService<Config, true>,
+    private readonly dataSource: DataSource,
     private readonly rcloneService: RCloneService,
   ) {
     this.logger = this.logger.child({ module: 'database', service: 'backup' });
@@ -48,7 +52,7 @@ export default class BackupService {
     this.logger.info('Starting backup');
     const tmpDir = await fs.promises.mkdtemp('tgs-database-backup-');
     try {
-      const dumpPath = path.join(tmpDir, 'dump.sql.gz');
+      const dumpPath = path.join(tmpDir, 'dump.tar');
       this.logger.info(
         `starting backup database ${baseDataSourceConfig.database}`,
       );
@@ -59,10 +63,20 @@ export default class BackupService {
       }
 
       // dump database
-      const dumpProcess = child_process.spawn('sh', [
-        '-c',
-        `pg_dump ${baseDataSourceConfig.database} | gzip > ${dumpPath}`,
-      ]);
+      const dataSourceOpts = this.dataSource
+        .options as PostgresConnectionOptions;
+      const dumpProcess = child_process.spawn(
+        'sh',
+        [
+          '-c',
+          `pg_dump ${dataSourceOpts.database} --host=${dataSourceOpts.host} --port=${dataSourceOpts.port} --username=${dataSourceOpts.username} -f ${dumpPath} --format=t`,
+        ],
+        {
+          env: {
+            PGPASSWORD: dataSourceOpts.password as string,
+          },
+        },
+      );
       await new Promise<void>((resolve, reject) => {
         dumpProcess.on('exit', (code) => {
           switch (code) {
