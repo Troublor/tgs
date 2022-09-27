@@ -103,7 +103,7 @@ export default class BackupService {
         this.configService.get('database.netDriveBackupFolder', {
           infer: true,
         }),
-        `${baseDataSourceConfig.database}-${mode}.sql.gz`,
+        `${baseDataSourceConfig.database}-${mode}.tar`,
       );
       await this.rcloneService.sync(dumpPath, remotePath);
       this.logger.info(`saved database dump to remote ${remotePath}`);
