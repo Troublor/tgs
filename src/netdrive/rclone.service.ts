@@ -142,4 +142,31 @@ export default class RCloneService {
       });
     });
   }
+
+  async bisync(path1: string, path2: string, resync = false): Promise<void> {
+    const args = ['bisync', path1, path2];
+    if (resync) {
+      args.push('--resync');
+    } else {
+      args.push('--force');
+    }
+    const bisyncProcess = child_process.spawn('rclone', args, {
+      env: {
+        RCLONE_CONFIG: this.rcloneConfigFilePath,
+      },
+    });
+    return new Promise((resolve, reject) => {
+      bisyncProcess.on('exit', (code) => {
+        switch (code) {
+          case 0:
+            this.logger.info(`bisynced ${path1} to ${path2}`);
+            resolve();
+            break;
+          default:
+            this.logger.error(`failed to bisync ${path1} to ${path2}`);
+            reject(new Error(`failed to bisync with code ${code}`));
+        }
+      });
+    });
+  }
 }
