@@ -70,7 +70,7 @@ export default class LedgerFileService {
     );
     this.ledgerFilePath = path.join(tmpDir, remoteFile);
     this.logger.info(`ledger file prepared at ${this.ledgerFilePath}`);
-    this.maintenanceTimer = setInterval(this.maintenance.bind(this), 5000);
+    this.maintenanceTimer = setInterval(this.maintenance.bind(this), 60 * 1000);
     return this.ledgerFilePath;
   }
 
