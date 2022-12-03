@@ -13,7 +13,7 @@ RUN chmod 755 /usr/bin/rclone
 RUN apk add postgresql-client
 
 # install hledger
-RUN curl -L -O https://github.com/simonmichael/hledger/releases/download/1.27.1/hledger-linux-x64.zip
+RUN curl -L -O https://github.com/simonmichael/hledger/releases/download/1.28/hledger-linux-x64.zip
 RUN unzip hledger-linux-x64.zip
 RUN tar -xvf hledger-linux-x64.tar
 RUN cp hledger hledger-ui hledger-web /usr/bin/
