@@ -2,6 +2,7 @@ import { CloudflareAccessGuard } from './cloudflare-access.guard';
 import { Logger } from 'winston';
 import { ExecutionContext } from '@nestjs/common';
 import User from '../database/entities/User.entity.js';
+import { DataSource } from 'typeorm';
 
 const jwtHeader =
   'eyJhbGciOiJSUzI1NiIsImtpZCI6ImNiMWFjNmQ0OWNhMjhlZjJkZmM4YTlhZjg2MjgyODZhNmMwZjVlMTVkNmQyNWU3NzA0NTZjNDNiMzgwN2VkN2UifQ';
@@ -18,7 +19,7 @@ describe('Cloudflare Access Guard', () => {
       const logger: () => Logger = jest.fn().mockReturnValue({
         info: jest.fn(),
       });
-      const dataSource: () => any = jest.fn().mockReturnValue({
+      const dataSource: () => DataSource = jest.fn().mockReturnValue({
         getRepository: jest.fn().mockReturnValue({
           findOne: jest.fn().mockReturnValue(new User()),
         }),

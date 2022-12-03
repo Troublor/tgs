@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import path from 'path';
 import fs from 'fs';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
-import winston, { clear } from 'winston';
+import winston from 'winston';
 import RCloneService from '../netdrive/rclone.service.js';
 import { ConfigService } from '@nestjs/config';
 import Config from '../config/schema.js';

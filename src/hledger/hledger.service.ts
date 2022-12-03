@@ -45,7 +45,7 @@ export default class HLedgerService {
       '--port',
       `${this._port}`,
       '--base-url',
-      'https://hledger.troublor.xyz',
+      domain,
       '--cors',
       '*',
       '--file',

@@ -10,7 +10,6 @@ import RCloneService from '../netdrive/rclone.service.js';
 import Config from '../config/schema.js';
 import { DataSource } from 'typeorm';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions.js';
-import { PostgresConnectionCredentialsOptions } from 'typeorm/driver/postgres/PostgresConnectionCredentialsOptions.js';
 
 @Injectable()
 export default class BackupService {

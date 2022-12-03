@@ -11,7 +11,7 @@ export default class MessageService {
   ) {}
 
   async broadcastMessageToTelegram(user: User, msg: string): Promise<number> {
-    const message = await this.userService.saveMessage(user, msg);
+    await this.userService.saveMessage(user, msg);
     const destinations = await this.userService.getAllChatsWithUser(user);
     for (const dest of destinations) {
       await this.notifierBotService.sendMessage(dest.id, msg);
