@@ -22,6 +22,11 @@ export default class HLedgerService {
 
   async start() {
     await this.startHLedgerRESTfulServer();
+    setTimeout(async () => {
+      // periodically restart hledger-web to avoid memory leak and deadlock
+      await this.stopHLedgerRESTfulServer();
+      await this.startHLedgerRESTfulServer();
+    }, 1000 * 3600);
   }
 
   async stop() {
@@ -73,6 +78,7 @@ export default class HLedgerService {
       return new Promise<void>((resolve, reject) => {
         this._process?.on('exit', (code, signal) => {
           this.logger.info('hledger-web exited', { code, signal });
+          this._process = undefined;
           resolve();
         });
         this._process?.on('error', (err) => {
