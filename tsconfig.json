@@ -8,11 +8,15 @@
     "emitDecoratorMetadata": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
+    "skipLibCheck": true,
     "rootDir": "src",
     "outDir": "dist",
     "types": [
       "node",
       "jest"
     ]
-  }
+  },
+  "exclude": [
+    "jest.config.ts"
+  ]
 }
