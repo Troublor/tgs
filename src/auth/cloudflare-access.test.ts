@@ -2,7 +2,10 @@ import { CloudflareAccessGuard } from './cloudflare-access.guard';
 import { Logger } from 'winston';
 import { ExecutionContext } from '@nestjs/common';
 import User from '../database/entities/User.entity.js';
-import { DataSource } from 'typeorm';
+import { any, mock, mockDeep } from 'jest-mock-extended';
+import { DataSource, Repository } from 'typeorm';
+import { HttpArgumentsHost } from '@nestjs/common/interfaces';
+import { Request } from 'express-serve-static-core';
 
 const jwtHeader =
   'eyJhbGciOiJSUzI1NiIsImtpZCI6ImNiMWFjNmQ0OWNhMjhlZjJkZmM4YTlhZjg2MjgyODZhNmMwZjVlMTVkNmQyNWU3NzA0NTZjNDNiMzgwN2VkN2UifQ';
@@ -16,31 +19,28 @@ describe('Cloudflare Access Guard', () => {
     let guard: CloudflareAccessGuard;
 
     beforeEach(() => {
-      const logger: () => Logger = jest.fn().mockReturnValue({
-        info: jest.fn(),
-      });
-      const dataSource: () => DataSource = jest.fn().mockReturnValue({
-        getRepository: jest.fn().mockReturnValue({
-          findOne: jest.fn().mockReturnValue(new User()),
-        }),
-      });
-      guard = new CloudflareAccessGuard(logger(), dataSource());
+      const logger = mock<Logger>();
+      const repository = mock<Repository<User>>();
+      repository.findOne.mockReturnValue(Promise.resolve(new User()));
+      const dataSource = mockDeep<DataSource>({ funcPropSupport: true });
+      dataSource.getRepository.mockReturnValue(repository);
+      guard = new CloudflareAccessGuard(
+        logger,
+        dataSource as unknown as DataSource,
+      );
     });
 
     it('should authenticate only my own access', async () => {
-      const mockExecutionContext: () => ExecutionContext = jest
-        .fn()
-        .mockReturnValue({
-          switchToHttp: () => ({
-            getRequest: () => ({
-              header: (name: string) =>
-                name === 'Cf-Access-Jwt-Assertion'
-                  ? [jwtHeader, jwtPayload, jwtSignature].join('.')
-                  : undefined,
-            }),
-          }),
-        });
-      const result = await guard.canActivate(mockExecutionContext());
+      const request = mock<Request>();
+      request.header.calledWith(any()).mockReturnValue(undefined);
+      request.header
+        .calledWith('Cf-Access-Jwt-Assertion')
+        .mockReturnValue([jwtHeader, jwtPayload, jwtSignature].join('.'));
+      const httpArgs = mock<HttpArgumentsHost>();
+      httpArgs.getRequest.mockReturnValue(request);
+      const mockExecutionContext = mock<ExecutionContext>();
+      mockExecutionContext.switchToHttp.mockReturnValue(httpArgs);
+      const result = await guard.canActivate(mockExecutionContext);
       expect(result).toBe(true);
     });
 
@@ -52,17 +52,14 @@ describe('Cloudflare Access Guard', () => {
       [[jwtHeader, jwtPayload + 'nonce', jwtSignature].join('.')],
       [[jwtHeader, jwtPayload, jwtSignature, 'extra'].join('.')],
     ])('should not authenticate invalid jwt', async (jwt) => {
-      const mockExecutionContext: () => ExecutionContext = jest
-        .fn()
-        .mockReturnValue({
-          switchToHttp: () => ({
-            getRequest: () => ({
-              header: (name: string) =>
-                name === 'Cf-Access-Jwt-Assertion' ? jwt : undefined,
-            }),
-          }),
-        });
-      const result = await guard.canActivate(mockExecutionContext());
+      const request = mock<Request>();
+      request.header.calledWith(any()).mockReturnValue(undefined);
+      request.header.calledWith('Cf-Access-Jwt-Assertion').mockReturnValue(jwt);
+      const httpArgs = mock<HttpArgumentsHost>();
+      httpArgs.getRequest.mockReturnValue(request);
+      const mockExecutionContext = mock<ExecutionContext>();
+      mockExecutionContext.switchToHttp.mockReturnValue(httpArgs);
+      const result = await guard.canActivate(mockExecutionContext);
       expect(result).toBe(false);
     });
   });

@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import winston from 'winston';
-import * as child_process from 'child_process';
+import child_process from 'child_process';
 import { baseDataSourceConfig } from './data-source.base.js';
 import path from 'path';
 import fs from 'fs';
@@ -23,6 +23,7 @@ export default class BackupService {
   }
 
   private active = false;
+  private timer: NodeJS.Timer | undefined;
 
   start() {
     this.active = true;
@@ -30,29 +31,40 @@ export default class BackupService {
   }
 
   stop() {
+    this.logger.info('Stopping backup loop');
     this.active = false;
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
   }
 
   /**
    * Start a periodic backup of the database.
    */
   private loop() {
+    const interval = this.configService.get('database.backupInterval', {
+      infer: true,
+    });
+    this.logger.info(`Starting backup loop with interval ${interval}ms`);
     this.active &&
       this.backup().then(() => {
-        this.active &&
-          setTimeout(
-            () => this.loop(),
-            this.configService.get('database.backupInterval', { infer: true }),
-          );
+        if (!this.active) return;
+        this.timer = setInterval(
+          () =>
+            this.backup().catch((e) =>
+              this.logger.error('Failed to backup database', { e: `${e}` }),
+            ),
+          interval,
+        );
       });
   }
 
-  private async backup(): Promise<void> {
-    this.logger.info('Starting backup');
+  async backup(): Promise<void> {
+    this.logger.debug('Starting backup');
     const tmpDir = await fs.promises.mkdtemp('tgs-database-backup-');
     try {
       const dumpPath = path.join(tmpDir, 'dump.tar');
-      this.logger.info(
+      this.logger.debug(
         `starting backup database ${baseDataSourceConfig.database}`,
       );
 
@@ -80,7 +92,7 @@ export default class BackupService {
         dumpProcess.on('exit', (code) => {
           switch (code) {
             case 0:
-              this.logger.info(`dumped database to ${dumpPath}`);
+              this.logger.debug(`dumped database to ${dumpPath}`);
               resolve();
               break;
             default:
@@ -89,7 +101,7 @@ export default class BackupService {
           }
         });
       });
-      this.logger.info(`dumped database to ${dumpPath}`);
+      this.logger.debug(`dumped database to ${dumpPath}`);
 
       if (!this.active) {
         this.logger.info('backup aborted');
@@ -105,7 +117,7 @@ export default class BackupService {
         `${baseDataSourceConfig.database}-${mode}.tar`,
       );
       await this.rcloneService.sync(dumpPath, remotePath);
-      this.logger.info(`saved database dump to remote ${remotePath}`);
+      this.logger.debug(`saved database dump to remote ${remotePath}`);
     } finally {
       // cleanup
       await fs.promises.rm(tmpDir, { recursive: true });
