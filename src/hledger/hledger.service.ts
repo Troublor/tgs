@@ -12,6 +12,8 @@ export default class HLedgerService {
   private _port: number | undefined;
   private _process: child_process.ChildProcess | undefined;
 
+  private _restartTimer: NodeJS.Timeout | undefined;
+
   constructor(
     @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: winston.Logger,
     private readonly configService: ConfigService<Config, true>,
@@ -22,15 +24,22 @@ export default class HLedgerService {
 
   async start() {
     await this.startHLedgerRESTfulServer();
-    setTimeout(async () => {
+    const restartInterval = await this.configService.get(
+      'hledger.restartInterval',
+      { infer: true },
+    );
+    this._restartTimer = setInterval(async () => {
       // periodically restart hledger-web to avoid memory leak and deadlock
       await this.stopHLedgerRESTfulServer();
       await this.startHLedgerRESTfulServer();
-    }, 1000 * 3600);
+    }, restartInterval);
   }
 
   async stop() {
     await this.stopHLedgerRESTfulServer();
+    if (this._restartTimer) {
+      clearInterval(this._restartTimer);
+    }
   }
 
   private async startHLedgerRESTfulServer(): Promise<void> {

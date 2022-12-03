@@ -23,14 +23,6 @@ export default class LedgerFileService {
     });
   }
 
-  async start() {
-    await this.prepare();
-  }
-
-  async stop() {
-    await this.unprepare();
-  }
-
   async checkHealth(): Promise<boolean> {
     if (!this.ledgerFilePath) {
       return false;
@@ -46,7 +38,7 @@ export default class LedgerFileService {
    */
   private maintenanceTimer: NodeJS.Timer | undefined;
 
-  private async prepare(): Promise<string> {
+  async start(): Promise<string> {
     if (this.ledgerFilePath) {
       return this.ledgerFilePath;
     }
@@ -70,11 +62,17 @@ export default class LedgerFileService {
     );
     this.ledgerFilePath = path.join(tmpDir, remoteFile);
     this.logger.info(`ledger file prepared at ${this.ledgerFilePath}`);
-    this.maintenanceTimer = setInterval(this.maintenance.bind(this), 60 * 1000);
+    const bisyncInterval = this.configService.get('hledger.bisyncInterval', {
+      infer: true,
+    });
+    this.maintenanceTimer = setInterval(
+      this.maintenance.bind(this),
+      bisyncInterval,
+    );
     return this.ledgerFilePath;
   }
 
-  private async maintenance() {
+  async maintenance() {
     if (!this.ledgerFilePath) {
       return;
     }
@@ -90,7 +88,7 @@ export default class LedgerFileService {
     );
   }
 
-  private async unprepare(): Promise<void> {
+  async stop(): Promise<void> {
     if (this.maintenanceTimer) {
       clearInterval(this.maintenanceTimer);
       this.maintenanceTimer = undefined;

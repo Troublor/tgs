@@ -1,4 +1,11 @@
-import { IsIn, IsInt, IsNotEmpty, ValidateNested } from 'class-validator';
+import {
+  IsIn,
+  IsInt,
+  IsNotEmpty,
+  Min,
+  ValidateIf,
+  ValidateNested,
+} from 'class-validator';
 import { Optional } from '@nestjs/common';
 
 export class LogConfig {
@@ -28,18 +35,31 @@ export class HLedgerConfig {
     this.port = 5000;
     this.baseUrl = 'https://hledger.troublor.xyz';
     this.disable = false;
+    this.restartInterval = 1000 * 3600;
+    this.bisyncInterval = 1000 * 60;
   }
 
+  @ValidateIf((o) => !o.disable)
   @IsNotEmpty()
   readonly netDriveLedgerFilePath: string;
 
+  @ValidateIf((o) => !o.disable)
   @IsNotEmpty()
   readonly port: number;
 
+  @ValidateIf((o) => !o.disable)
   @IsNotEmpty()
   readonly baseUrl: string;
 
   readonly disable: boolean;
+
+  @ValidateIf((o) => !o.disable)
+  @Min(1000)
+  readonly restartInterval: number;
+
+  @ValidateIf((o) => !o.disable)
+  @Min(1000)
+  readonly bisyncInterval: number;
 }
 
 export class DatabaseConfig {
@@ -104,6 +124,7 @@ export class TelegramBotConfig {
     this.disable = false;
   }
 
+  @ValidateIf((o) => !o.disable)
   @IsNotEmpty()
   readonly token: string;
 
