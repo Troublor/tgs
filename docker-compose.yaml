@@ -14,7 +14,7 @@ services:
     ports:
       - 5432:5432
   tgs:
-    image: troublor/tgs:1.0.1
+    image: troublor/tgs:1.0.2
     build:
       context: .
       dockerfile: Dockerfile
