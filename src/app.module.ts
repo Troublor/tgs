@@ -10,6 +10,7 @@ import winston from 'winston';
 import Transport from 'winston-transport';
 import DatabaseModule from './database/database.module.js';
 import MessageModule from './message/message.module.js';
+import { structured } from '@troubkit/log';
 
 @Module({
   imports: [
@@ -19,7 +20,15 @@ import MessageModule from './message/message.module.js';
     }),
     WinstonModule.forRootAsync({
       useFactory: (config: ConfigService<Config, true>) => {
-        const transports: Transport[] = [new winston.transports.Console()];
+        const transports: Transport[] = [
+          new winston.transports.Console({
+            format: winston.format.combine(
+              winston.format.colorize(),
+              winston.format.timestamp(),
+              structured(),
+            ),
+          }),
+        ];
         if (config.get('log.file', { infer: true })) {
           transports.push(
             new winston.transports.File({

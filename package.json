@@ -26,6 +26,7 @@
     "@nestjs/platform-express": "^9.0.11",
     "@nestjs/swagger": "^6.1.2",
     "@nestjs/typeorm": "^9.0.1",
+    "@troubkit/log": "^0.4.0",
     "async": "^3.2.4",
     "axios": "^0.27.2",
     "class-validator": "^0.13.2",
