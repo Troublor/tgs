@@ -65,7 +65,7 @@ export default class RCloneService {
       mountProcess.on('exit', (code) => {
         switch (code) {
           case 0:
-            this.logger.info(`mounted ${remote} to ${mountPoint}`);
+            this.logger.debug(`mounted ${remote} to ${mountPoint}`);
             this.mountMappings[mountPoint] = remote;
             resolve();
             break;
@@ -83,7 +83,7 @@ export default class RCloneService {
       unmountProcess.on('exit', (code) => {
         switch (code) {
           case 0:
-            this.logger.info(
+            this.logger.debug(
               `unmounted ${this.mountMappings[mountPoint]} from ${mountPoint}`,
             );
             delete this.mountMappings[mountPoint];
@@ -111,7 +111,7 @@ export default class RCloneService {
       syncProcess.on('exit', (code) => {
         switch (code) {
           case 0:
-            this.logger.info(`synced ${source} to ${destination}`);
+            this.logger.debug(`synced ${source} to ${destination}`);
             resolve();
             break;
           default:
@@ -132,7 +132,7 @@ export default class RCloneService {
       touchProcess.on('exit', (code) => {
         switch (code) {
           case 0:
-            this.logger.info(`touched ${remote}`);
+            this.logger.debug(`touched ${remote}`);
             resolve();
             break;
           default:
@@ -159,7 +159,7 @@ export default class RCloneService {
       bisyncProcess.on('exit', (code) => {
         switch (code) {
           case 0:
-            this.logger.info(`bisynced ${path1} to ${path2}`);
+            this.logger.debug(`bisynced ${path1} to ${path2}`);
             resolve();
             break;
           default:
