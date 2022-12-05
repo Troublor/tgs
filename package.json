@@ -1,6 +1,6 @@
 {
   "name": "tgs",
-  "version": "1.0.2",
+  "version": "1.0.3-0",
   "description": "Troublor General Purpose Server",
   "repository": "https://github.com/Troublor/tgs",
   "author": "William Aaron Cheung",
@@ -66,5 +66,6 @@
     "ts-node": "^10.9.1",
     "type-fest": "^3.3.0",
     "typescript": "^4.8.2"
-  }
+  },
+  "stableVersion": "1.0.2"
 }

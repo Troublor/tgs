@@ -32,3 +32,5 @@ git tag "v$v"
 
 # prepare next cycle
 yarn version prerelease
+git add "$ROOT"/package.json
+git commit -m "chore: prepare next cycle"
