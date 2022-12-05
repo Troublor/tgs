@@ -13,9 +13,8 @@ services:
         target: /pgdata
     ports:
       - 5432:5432
-
   tgs:
-    image: troublor/tgs:latest
+    image: troublor/tgs:1.0.1
     build:
       context: .
       dockerfile: Dockerfile
