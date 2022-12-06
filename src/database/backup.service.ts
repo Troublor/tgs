@@ -83,6 +83,7 @@ export default class BackupService {
           `pg_dump ${dataSourceOpts.database} --host=${dataSourceOpts.host} --port=${dataSourceOpts.port} --username=${dataSourceOpts.username} -f ${dumpPath} --format=t`,
         ],
         {
+          stdio: 'inherit',
           env: {
             PGPASSWORD: dataSourceOpts.password as string,
           },
