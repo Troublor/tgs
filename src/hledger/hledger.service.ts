@@ -1,11 +1,11 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import winston from 'winston';
-import LedgerFileService from './ledger-file.service.js';
 import * as child_process from 'child_process';
 import * as net from 'net';
 import { ConfigService } from '@nestjs/config';
 import Config from '../config/schema.js';
+import LedgerFileGitService from './ledger-file-git.service.js';
 
 @Injectable()
 export default class HLedgerService {
@@ -17,7 +17,7 @@ export default class HLedgerService {
   constructor(
     @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: winston.Logger,
     private readonly configService: ConfigService<Config, true>,
-    private readonly ledgerFileService: LedgerFileService,
+    private readonly ledgerFileGitService: LedgerFileGitService,
   ) {
     this.logger = this.logger.child({ module: 'hledger' });
   }
@@ -58,7 +58,7 @@ export default class HLedgerService {
       '--cors',
       '*',
       '--file',
-      this.ledgerFileService.ledgerFilePath as string,
+      this.ledgerFileGitService.ledgerFilePath as string,
     ]);
     this._process.on('exit', (code, signal) => {
       this.logger.info('hledger-web exited', { code, signal });

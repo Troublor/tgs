@@ -57,6 +57,7 @@ export default class RCloneService {
       ],
       {
         env: {
+          ...process.env,
           RCLONE_CONFIG: this.rcloneConfigFilePath,
         },
       },
@@ -103,6 +104,7 @@ export default class RCloneService {
       ['sync', source, destination],
       {
         env: {
+          ...process.env,
           RCLONE_CONFIG: this.rcloneConfigFilePath,
         },
       },
@@ -125,6 +127,7 @@ export default class RCloneService {
   async touch(remote: string): Promise<void> {
     const touchProcess = child_process.spawn('rclone', ['touch', remote], {
       env: {
+        ...process.env,
         RCLONE_CONFIG: this.rcloneConfigFilePath,
       },
     });
@@ -152,6 +155,7 @@ export default class RCloneService {
     }
     const bisyncProcess = child_process.spawn('rclone', args, {
       env: {
+        ...process.env,
         RCLONE_CONFIG: this.rcloneConfigFilePath,
       },
     });

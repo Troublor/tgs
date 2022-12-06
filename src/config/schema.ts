@@ -34,6 +34,7 @@ export class HLedgerConfig {
     this.netDriveLedgerFilePath = 'Database/hledger/main.journal';
     this.port = 5000;
     this.baseUrl = 'https://hledger.troublor.xyz';
+    this.webhookSecret = 'secret';
     this.disable = false;
     this.restartInterval = 1000 * 3600;
     this.bisyncInterval = 1000 * 60;
@@ -50,6 +51,9 @@ export class HLedgerConfig {
   @ValidateIf((o) => !o.disable)
   @IsNotEmpty()
   readonly baseUrl: string;
+
+  @ValidateIf((o) => !o.disable)
+  readonly webhookSecret: string;
 
   readonly disable: boolean;
 
@@ -131,6 +135,18 @@ export class TelegramBotConfig {
   readonly disable: boolean;
 }
 
+export class GitHub {
+  static default() {
+    return new GitHub();
+  }
+
+  private constructor() {
+    this.accessToken = '';
+  }
+
+  readonly accessToken: string;
+}
+
 export default class Config {
   static default(): Config {
     return new Config();
@@ -144,6 +160,7 @@ export default class Config {
     this.netDrive = NetDriveConfig.default();
     this.hledger = HLedgerConfig.default();
     this.telegramBot = TelegramBotConfig.default();
+    this.github = GitHub.default();
   }
 
   @IsIn(['production', 'development'])
@@ -165,4 +182,7 @@ export default class Config {
 
   @ValidateNested()
   readonly telegramBot: TelegramBotConfig;
+
+  @ValidateNested()
+  readonly github: GitHub;
 }

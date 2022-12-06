@@ -7,17 +7,18 @@ import NetDriveModule from '../netdrive/netdrive.module.js';
 import HLedgerService from './hledger.service.js';
 import { ConfigService } from '@nestjs/config';
 import Config from '../config/schema.js';
+import LedgerFileGitService from './ledger-file-git.service.js';
 
 @Module({
   imports: [NetDriveModule],
   controllers: [HLedgerController],
-  providers: [LedgerFileService, HLedgerService],
+  providers: [LedgerFileService, HLedgerService, LedgerFileGitService],
 })
 export default class HLedgerModule implements OnModuleInit, OnModuleDestroy {
   constructor(
     @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: winston.Logger,
     private readonly configService: ConfigService<Config, true>,
-    private readonly ledgerFileService: LedgerFileService,
+    private readonly ledgerFileGitService: LedgerFileGitService,
     private readonly hledgerService: HLedgerService,
   ) {
     this.logger = this.logger.child({ module: 'hledger' });
@@ -28,11 +29,7 @@ export default class HLedgerModule implements OnModuleInit, OnModuleDestroy {
       this.logger.info('hledger is disabled');
       return;
     }
-    await this.ledgerFileService.start();
-    if (!(await this.ledgerFileService.checkHealth())) {
-      this.logger.error('Ledger file is not healthy');
-      process.exit(-1);
-    }
+    await this.ledgerFileGitService.start();
     this.logger.info('Ledger file is healthy');
 
     await this.hledgerService.start();
@@ -47,6 +44,6 @@ export default class HLedgerModule implements OnModuleInit, OnModuleDestroy {
     await this.hledgerService.stop();
 
     this.logger.info('Stopping ledger file service');
-    await this.ledgerFileService.stop();
+    await this.ledgerFileGitService.stop();
   }
 }
