@@ -14,7 +14,7 @@ services:
     ports:
       - 5432:5432
   tgs:
-    image: troublor/tgs:1.1.0
+    image: troublor/tgs:1.1.1
     build:
       context: .
       dockerfile: Dockerfile
@@ -38,5 +38,5 @@ services:
     environment:
       - TGS_CONFIG=/app/config.yaml
     ports:
-      - 3000:3000 # tgs
-      - 5000:5000 # hledger-web
+      - 3000:3000
+      - 5000:5000
