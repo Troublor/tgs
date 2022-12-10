@@ -23,7 +23,7 @@ yarn version "$1"
 v=$(jq -r .version "$ROOT"/package.json)
 
 # update docker-compose.yaml
-yq -i ".services.tgs.image = \"troublor/tgs:$v\"" "$ROOT"/docker-compose.yaml
+yq -i -y ".services.tgs.image = \"troublor/tgs:$v\"" "$ROOT"/docker-compose.yaml
 
 # git commit
 git add "$ROOT"/package.json "$ROOT"/docker-compose.yaml
