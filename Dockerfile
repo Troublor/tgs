@@ -26,6 +26,8 @@ WORKDIR /app
 
 RUN yarn install
 RUN yarn build
+RUN git config --global user.email "troublor@live.com"
+RUN git config --global user.name "Troublor General-Purpose Server"
 
 ENV TGS_CONFIG=/app/config.yaml
 ENTRYPOINT ["yarn", "start"]
