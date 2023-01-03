@@ -41,7 +41,7 @@ export default class LedgerFileGitService {
         this.ledgersRepoPath,
       );
     }
-    this._ledgerFilePath = path.join(this.ledgersRepoPath, 'main.journal');
+    this._ledgerFilePath = path.join(this.ledgersRepoPath, 'main.ledger');
     fs.watchFile(this._ledgerFilePath, async (curr, prev) => {
       if (curr.mtime.getTime() > prev.mtime.getTime()) {
         const git = simpleGit(this.ledgersRepoPath);
