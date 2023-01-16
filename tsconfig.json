@@ -11,12 +11,7 @@
     "skipLibCheck": true,
     "rootDir": "src",
     "outDir": "dist",
-    "types": [
-      "node",
-      "jest"
-    ]
+    "types": ["node", "jest"]
   },
-  "exclude": [
-    "jest.config.ts"
-  ]
+  "exclude": ["jest.config.ts"]
 }

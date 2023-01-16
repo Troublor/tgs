@@ -1,2 +1,4 @@
 /.yarn/
 /dist/
+/coverage/
+/.vscode/
