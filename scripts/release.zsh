@@ -27,7 +27,7 @@ yq -i ".services.tgs.image = \"troublor/tgs:$v\"" "$ROOT"/docker-compose.yaml
 
 # git commit
 git add "$ROOT"/package.json "$ROOT"/docker-compose.yaml
-git commit -m "chore: release $v"
+git commit -m "chore: release v$v"
 git tag "v$v"
 
 # prepare next cycle

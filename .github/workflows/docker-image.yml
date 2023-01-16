@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Build Docker Image
 
 on:
   push:
@@ -20,7 +20,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build the Docker image
-        run: docker build -t troublor/tgs:$(jq -r .version package.json) .
+        run: docker build -t troublor/tgs:v$(jq -r .version package.json) .
       - name: Push Docker images
-        run: docker push troublor/tgs:$(jq -r .version package.json)
+        run: docker push troublor/tgs:v$(jq -r .version package.json)
 
