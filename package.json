@@ -28,7 +28,7 @@
     "@nestjs/swagger": "^6.1.4",
     "@nestjs/typeorm": "^9.0.1",
     "@troubkit/log": "^0.4.0",
-    "class-validator": "^0.13.0",
+    "class-validator": "^0.14.0",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
     "nest-winston": "^1.8.0",
