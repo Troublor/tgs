@@ -20,6 +20,7 @@ const config: JestConfigWithTsJest = {
     ],
   },
   testPathIgnorePatterns: ['/node_modules/', '/dist/'],
+  coverageProvider: 'v8',
 };
 
 export default config;
