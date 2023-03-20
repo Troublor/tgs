@@ -888,9 +888,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nestjs/common@npm:^9.3.8":
-  version: 9.3.8
-  resolution: "@nestjs/common@npm:9.3.8"
+"@nestjs/common@npm:^9.3.10":
+  version: 9.3.10
+  resolution: "@nestjs/common@npm:9.3.10"
   dependencies:
     iterare: 1.2.1
     tslib: 2.5.0
@@ -908,7 +908,7 @@ __metadata:
       optional: true
     class-validator:
       optional: true
-  checksum: 404d33265f57345e15341b954a7ef25ed9a190155f117468f3e1d8e18c9d4a364766c481324ef7f06ef2ca2bddcf04519ab61e88a5f61c64d1a111ddc5ae3e9b
+  checksum: 5dc840a40ee02bf19abff2bf565910d55585e0bb9a9fa5be8d036323df943b951b6f2213f57758a11bb2291936f48d8c24f045d4f5abce4672cc1cf08e0509b5
   languageName: node
   linkType: hard
 
@@ -6112,7 +6112,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "tgs@workspace:."
   dependencies:
-    "@nestjs/common": ^9.3.8
+    "@nestjs/common": ^9.3.10
     "@nestjs/config": ^2.3.1
     "@nestjs/core": ^9.2.1
     "@nestjs/platform-express": ^9.3.8
