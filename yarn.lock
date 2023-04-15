@@ -888,13 +888,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nestjs/common@npm:^9.3.8":
-  version: 9.3.8
-  resolution: "@nestjs/common@npm:9.3.8"
+"@nestjs/common@npm:^9.4.0":
+  version: 9.4.0
+  resolution: "@nestjs/common@npm:9.4.0"
   dependencies:
     iterare: 1.2.1
     tslib: 2.5.0
-    uid: 2.0.1
+    uid: 2.0.2
   peerDependencies:
     cache-manager: <=5
     class-transformer: "*"
@@ -908,7 +908,7 @@ __metadata:
       optional: true
     class-validator:
       optional: true
-  checksum: 404d33265f57345e15341b954a7ef25ed9a190155f117468f3e1d8e18c9d4a364766c481324ef7f06ef2ca2bddcf04519ab61e88a5f61c64d1a111ddc5ae3e9b
+  checksum: 751fc94111301da047e42f845415b806a393ca4ecadbe6cfcec9cf6bd230bb8be3a159faf574beb1ff98b2a436a432a726ff3dfccff21685f6ce5cb99ed8bb98
   languageName: node
   linkType: hard
 
@@ -6112,7 +6112,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "tgs@workspace:."
   dependencies:
-    "@nestjs/common": ^9.3.8
+    "@nestjs/common": ^9.4.0
     "@nestjs/config": ^2.3.1
     "@nestjs/core": ^9.2.1
     "@nestjs/platform-express": ^9.3.8
@@ -6510,12 +6510,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uid@npm:2.0.1":
-  version: 2.0.1
-  resolution: "uid@npm:2.0.1"
+"uid@npm:2.0.2":
+  version: 2.0.2
+  resolution: "uid@npm:2.0.2"
   dependencies:
     "@lukeed/csprng": ^1.0.0
-  checksum: 0a3c697d8dd1f3b647afa35c411b11fd8fa2fb6dbd8a49fe109a4aa5214068c2c58781aa6e4516dfd16f0fc524fb7bba0833e9c1dc1ed3f1965b520349be9ad5
+  checksum: 98aabddcd6fe46f9b331b0378a93ee9cc51474348ada02006df9d10b4abc783ed596748ed9f20d7f6c5ff395dbcd1e764a65a68db6f39a31c95ae85ef13fe979
   languageName: node
   linkType: hard
 
