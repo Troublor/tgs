@@ -1198,10 +1198,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/async@npm:^3.2.16":
-  version: 3.2.16
-  resolution: "@types/async@npm:3.2.16"
-  checksum: 42b26d59e65ebb06ca5debee128a9dc9684af5f376a6b74e5d6e9e969e999077593aa04504ca5ac1f30e18371c06dcc5edeaf64be6e727fa20dbd1a98c487c37
+"@types/async@npm:^3.2.19":
+  version: 3.2.19
+  resolution: "@types/async@npm:3.2.19"
+  checksum: 74cd490438b3c396801434959300b4d1e7a0b0c4a5acfe83957934788dea1efdb89de642d179b54b7d7026e952ed0cf4bd521455e8b418b9e40ff58dc62c1f38
   languageName: node
   linkType: hard
 
@@ -6120,7 +6120,7 @@ __metadata:
     "@nestjs/testing": ^9.2.1
     "@nestjs/typeorm": ^9.0.1
     "@troubkit/log": ^0.4.0
-    "@types/async": ^3.2.16
+    "@types/async": ^3.2.19
     "@types/express": ^4.17.17
     "@types/jest": ^29.4.0
     "@types/js-yaml": ^4.0.5
