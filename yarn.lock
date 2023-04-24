@@ -4840,15 +4840,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nest-winston@npm:^1.8.0":
-  version: 1.8.0
-  resolution: "nest-winston@npm:1.8.0"
+"nest-winston@npm:^1.9.1":
+  version: 1.9.1
+  resolution: "nest-winston@npm:1.9.1"
   dependencies:
     fast-safe-stringify: ^2.1.1
   peerDependencies:
     "@nestjs/common": ^5.0.0 || ^6.6.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
     winston: ^3.0.0
-  checksum: 7837eea05d68af3b4b6b6a1771adbf915086f4b6dff03c0131be1b0800b562e6fde7ef580a5e626f5a3ab92996845889230ac037432fe1d0e14a61da93668314
+  checksum: 811afd4a750971e67b2000d30aa87fb4f91b91e9d90fcf89925a58b01911cf8d301cdbe0de3f8ca8a91f5c01db3e0504393ea705134c549711ce2063404e03d8
   languageName: node
   linkType: hard
 
@@ -6139,7 +6139,7 @@ __metadata:
     jest-serial-runner: ^1.2.1
     js-yaml: ^4.1.0
     lodash: ^4.17.21
-    nest-winston: ^1.8.0
+    nest-winston: ^1.9.1
     passport-jwt: ^4.0.1
     pg: ^8.9.0
     prettier: ^2.8.4
