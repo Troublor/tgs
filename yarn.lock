@@ -1625,20 +1625,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^5.49.0":
-  version: 5.49.0
-  resolution: "@typescript-eslint/parser@npm:5.49.0"
+"@typescript-eslint/parser@npm:^5.60.0":
+  version: 5.60.0
+  resolution: "@typescript-eslint/parser@npm:5.60.0"
   dependencies:
-    "@typescript-eslint/scope-manager": 5.49.0
-    "@typescript-eslint/types": 5.49.0
-    "@typescript-eslint/typescript-estree": 5.49.0
+    "@typescript-eslint/scope-manager": 5.60.0
+    "@typescript-eslint/types": 5.60.0
+    "@typescript-eslint/typescript-estree": 5.60.0
     debug: ^4.3.4
   peerDependencies:
     eslint: ^6.0.0 || ^7.0.0 || ^8.0.0
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 87b3760cfc29b3edd3d28fe0d5e9e5a3833d60398d7779ecc657b9e3bfec624cd464176e26b24b0761fb79cc88daddae19560340f91119c4856b91f9663594dd
+  checksum: 94e7931a5b356b16638b281b8e1d661f8b1660f0c75a323537f68b311dae91b7a575a0a019d4ea05a79cc5d42b5cb41cc367205691cdfd292ef96a3b66b1e58b
   languageName: node
   linkType: hard
 
@@ -1649,6 +1649,16 @@ __metadata:
     "@typescript-eslint/types": 5.49.0
     "@typescript-eslint/visitor-keys": 5.49.0
   checksum: 466047e24ff8a4195f14aadde39375f22891bdaced09e58c89f2c32af0aa4a0d87e71a5f006f6ab76858e6f30c4b764b1e0ef7bc26713bb78add30638108c45f
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/scope-manager@npm:5.60.0":
+  version: 5.60.0
+  resolution: "@typescript-eslint/scope-manager@npm:5.60.0"
+  dependencies:
+    "@typescript-eslint/types": 5.60.0
+    "@typescript-eslint/visitor-keys": 5.60.0
+  checksum: b21ee1ef57be948a806aa31fd65a9186766b3e1a727030dc47025edcadc54bd1aa6133a439acd5f44a93e2b983dd55bc5571bb01cb834461dab733682d66256a
   languageName: node
   linkType: hard
 
@@ -1676,6 +1686,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@typescript-eslint/types@npm:5.60.0":
+  version: 5.60.0
+  resolution: "@typescript-eslint/types@npm:5.60.0"
+  checksum: 48f29e5c084c5663cfed1a6c4458799a6690a213e7861a24501f9b96698ae59e89a1df1c77e481777e4da78f1b0a5573a549f7b8880e3f4071a7a8b686254db8
+  languageName: node
+  linkType: hard
+
 "@typescript-eslint/typescript-estree@npm:5.49.0":
   version: 5.49.0
   resolution: "@typescript-eslint/typescript-estree@npm:5.49.0"
@@ -1691,6 +1708,24 @@ __metadata:
     typescript:
       optional: true
   checksum: f331af9f0ef3ce3157c421b8cc727dec5aa0a60add305aa4c676a02c63ec07799105268af192c5ed193a682b7ed804564d29d49bdbd2019678e495d80e65e29a
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/typescript-estree@npm:5.60.0":
+  version: 5.60.0
+  resolution: "@typescript-eslint/typescript-estree@npm:5.60.0"
+  dependencies:
+    "@typescript-eslint/types": 5.60.0
+    "@typescript-eslint/visitor-keys": 5.60.0
+    debug: ^4.3.4
+    globby: ^11.1.0
+    is-glob: ^4.0.3
+    semver: ^7.3.7
+    tsutils: ^3.21.0
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 0f4f342730ead42ba60b5fca4bf1950abebd83030010c38b5df98ff9fd95d0ce1cfc3974a44c90c65f381f4f172adcf1a540e018d7968cc845d937bf6c734dae
   languageName: node
   linkType: hard
 
@@ -1719,6 +1754,16 @@ __metadata:
     "@typescript-eslint/types": 5.49.0
     eslint-visitor-keys: ^3.3.0
   checksum: 46dc7bc713e8825d1fccba521fdf7c6e2f8829e491c2afd44dbe4105c6432e3c3dfe7e1ecb221401269d639264bb4af77b60a7b65521fcff9ab02cd31d8ef782
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/visitor-keys@npm:5.60.0":
+  version: 5.60.0
+  resolution: "@typescript-eslint/visitor-keys@npm:5.60.0"
+  dependencies:
+    "@typescript-eslint/types": 5.60.0
+    eslint-visitor-keys: ^3.3.0
+  checksum: d39b2485d030f9755820d0f6f3748a8ec44e1ca23cb36ddcba67a9eb1f258c8ec83c61fc015c50e8f4a00d05df62d719dbda445625e3e71a64a659f1d248157e
   languageName: node
   linkType: hard
 
@@ -6585,7 +6630,7 @@ __metadata:
     "@types/pg": ^8.6.6
     "@types/validator": ^13.7.12
     "@typescript-eslint/eslint-plugin": ^5.49.0
-    "@typescript-eslint/parser": ^5.49.0
+    "@typescript-eslint/parser": ^5.60.0
     class-validator: ^0.13.0
     eslint: ^8.34.0
     eslint-plugin-unused-imports: ^2.0.0
