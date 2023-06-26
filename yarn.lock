@@ -6265,14 +6265,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"simple-git@npm:^3.16.0":
-  version: 3.16.0
-  resolution: "simple-git@npm:3.16.0"
+"simple-git@npm:^3.19.1":
+  version: 3.19.1
+  resolution: "simple-git@npm:3.19.1"
   dependencies:
     "@kwsites/file-exists": ^1.1.1
     "@kwsites/promise-deferred": ^1.1.1
     debug: ^4.3.4
-  checksum: fd28eb43be39d158d2c321cd34eb00f61c365513478ff2bb31f4da06315dcd018e03c6ece9f99558f3fd8834171072850aed1376bf50f8d922b0e2dadede0c2d
+  checksum: ab7c6901130eadd5758c5f1b0d957573b13cd981549cb5853e757cf13f8cb53b79a50e1acde8eaceba88da814d252f90cf7feab9bd67c64db903250adc51b02f
   languageName: node
   linkType: hard
 
@@ -6601,7 +6601,7 @@ __metadata:
     prettier: ^2.8.4
     reflect-metadata: ^0.1.13
     rxjs: ^7.8.0
-    simple-git: ^3.16.0
+    simple-git: ^3.19.1
     telegraf: ^4.11.2
     ts-jest: ^29.0.5
     ts-jest-resolver: ^2.0.0
